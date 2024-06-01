@@ -2,6 +2,9 @@ import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
 
+// Charger la police
+k.loadFont("monogram", "./monogram.ttf", 16);
+
 k.loadSprite("spritesheet", "./spritesheet.png", {
     sliceX: 39,
     sliceY: 31,
@@ -16,7 +19,7 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
 });
 
 k.loadSprite("map", "./map.png");
-k.loadSound("background_music", "./background_music.mp3");  // Chargez la musique de fond
+k.loadSound("background_music", "./background_music.mp3");
 
 k.setBackground(k.Color.fromHex("#311047"));
 
@@ -42,12 +45,12 @@ k.scene("main", async () => {
     ]);
 
     function startMusic() {
-        // Jouez la musique de fond en boucle
+        // Jouer la musique de fond en boucle
         k.play("background_music", { loop: true });
         window.removeEventListener("click", startMusic);
     }
 
-    // Ajoutez un écouteur d'événement pour démarrer la musique au clic de l'utilisateur
+    // Ajouter un écouteur d'événement pour démarrer la musique au clic de l'utilisateur
     window.addEventListener("click", startMusic);
 
     for (const layer of layers) {
