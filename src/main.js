@@ -2,10 +2,8 @@ import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
 
-// Charger la police
-k.loadFont("monogram", "./monogram.ttf", 16);
-
-k.loadSprite("spritesheet", "./spritesheet.png", {
+k.loadFont("monogram", "/public/monogram.ttf", 16);  // Assurez-vous que ce chemin est correct
+k.loadSprite("spritesheet", "/public/spritesheet.png", {
     sliceX: 39,
     sliceY: 31,
     anims: {
@@ -17,14 +15,13 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
         "walk-up": { from: 1014, to: 1017, loop: true, speed: 8 },
     },
 });
-
-k.loadSprite("map", "./map.png");
-k.loadSound("background_music", "./background_music.mp3");
+k.loadSprite("map", "/public/map.png");
+k.loadSound("background_music", "/public/background_music.mp3");
 
 k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
-    const mapData = await (await fetch("./map.json")).json();
+    const mapData = await (await fetch("/public/map.json")).json();
     const layers = mapData.layers;
 
     const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactor)]);
@@ -45,12 +42,10 @@ k.scene("main", async () => {
     ]);
 
     function startMusic() {
-        // Jouer la musique de fond en boucle
         k.play("background_music", { loop: true });
         window.removeEventListener("click", startMusic);
     }
 
-    // Ajouter un écouteur d'événement pour démarrer la musique au clic de l'utilisateur
     window.addEventListener("click", startMusic);
 
     for (const layer of layers) {
@@ -61,9 +56,9 @@ k.scene("main", async () => {
                     k.area(),
                     k.body({ isStatic: true }),
                     k.pos(boundary.x * scaleFactor, boundary.y * scaleFactor),
-                    k.opacity(0),  // Rendre les boundaries invisibles
-                    "boundary",  // Assigner un nom générique à chaque boundary
-                    { name: boundary.name || "boundary" }  // Ajouter la propriété de nom
+                    k.opacity(0),
+                    "boundary",
+                    { name: boundary.name || "boundary" }
                 ]);
             }
             continue;
