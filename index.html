@@ -4,18 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
+    <title>Portfolio Game</title>
     <style>
-        @font-face {
+      @font-face {
         font-family: 'Monogram';
-        src: url('../public/monogram.ttf') format('truetype');
+        src: url('./public/monogram.ttf') format('truetype');
       }
 
-
       body {
-        font-family: monogram, monospace;
+        font-family: 'Monogram', monospace;
         font-size: 2rem;
         overflow: hidden;
       }
@@ -51,7 +48,7 @@
       }
 
       .ui-close-btn {
-        font-family: monogram, monospace;
+        font-family: 'Monogram', monospace;
         border-style: none;
         border-radius: 3px;
         padding: 1rem;
@@ -72,9 +69,9 @@
         color: rgb(238, 238, 238);
         user-select: none;
       }
-
-        
     </style>
+  </head>
+  <body>
     <div id="app">
       <div id="ui">
         <p class="note">Tap/Click around to move</p>
@@ -89,6 +86,6 @@
       </div>
       <canvas id="game"></canvas>
     </div>
-    <script type="module" src="src/main.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
