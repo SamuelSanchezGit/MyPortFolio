@@ -42,7 +42,7 @@ k.scene("main", async () => {
     ]);
 
     function startMusic() {
-        k.play("background_music", { loop: true });
+        k.play("background_music", { loop: true, volume: 0.5 }); // Volume réduit à 50%
         window.removeEventListener("click", startMusic);
     }
 
@@ -76,6 +76,16 @@ k.scene("main", async () => {
             }
         }
     }
+
+    // Afficher le lien vers le CV directement
+    const cvLink = document.createElement("a");
+    cvLink.href = "URL_DE_TON_CV";
+    cvLink.textContent = "Lien vers le CV";
+    cvLink.style.position = "absolute";
+    cvLink.style.top = "10px";
+    cvLink.style.left = "10px";
+    cvLink.style.zIndex = "1000";
+    document.body.appendChild(cvLink);
 
     setCamScale(k);
 
