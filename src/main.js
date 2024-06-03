@@ -58,7 +58,7 @@ k.scene("main", async () => {
                     k.pos(boundary.x * scaleFactor, boundary.y * scaleFactor),
                     k.opacity(0),
                     "boundary",
-                    { name: boundary.name || "boundary" }
+                    { name: boundary.name || "boundary" },
                 ]);
             }
             continue;
@@ -77,16 +77,6 @@ k.scene("main", async () => {
         }
     }
 
-    // Afficher le lien vers le CV directement
-    const cvLink = document.createElement("a");
-    cvLink.href = "URL_DE_TON_CV";
-    cvLink.textContent = "Lien vers le CV";
-    cvLink.style.position = "absolute";
-    cvLink.style.top = "10px";
-    cvLink.style.left = "10px";
-    cvLink.style.zIndex = "1000";
-    document.body.appendChild(cvLink);
-
     setCamScale(k);
 
     k.onResize(() => {
@@ -94,7 +84,10 @@ k.scene("main", async () => {
     });
 
     player.onCollide("boundary", (obj) => {
-        const dialogueText = dialogueData[obj.name] || "No dialogue available for this boundary.";
+        let dialogueText = dialogueData[obj.name] || "No dialogue available for this boundary.";
+        if (obj.name === "cv_boundary") {
+            dialogueText += '<br><a href="URL_DE_TON_CV" target="_blank">Lien vers le CV</a>';
+        }
         if (dialogueData[obj.name]) {
             player.isInDialogue = true;
             displayDialogue(dialogueText, () => (player.isInDialogue = false));
@@ -179,8 +172,8 @@ k.scene("main", async () => {
         ];
 
         let nbOfKeyPressed = 0;
-        for (const key of keyMap) {
-            if (key) {
+        for (const k of keyMap) {
+            if (k) {
                 nbOfKeyPressed++;
             }
         }
